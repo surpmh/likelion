@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class AlphabetCount {
+    public static boolean isAlphabet(char c) {
+        return ((int)c >= 97 && (int)c <= 122);
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("문자열을 입력하세요: ");
@@ -18,7 +21,9 @@ public class AlphabetCount {
 
         // 알파벳 개수 세기
         for (int i=0; i < str.length(); i++) {
-            alphabet.put(str.charAt(i), alphabet.get(str.charAt(i)) + 1);
+            if (isAlphabet(str.charAt(i))) {
+                alphabet.put(str.charAt(i), alphabet.get(str.charAt(i)) + 1);
+            }
         }
 
         // 출력하기
