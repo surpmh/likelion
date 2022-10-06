@@ -16,8 +16,8 @@ public class AlphabetCount {
         HashMap<Character, Integer> alphabet = new HashMap<>();
 
         // 알파벳 소문자를 key에 저장
-        for (int i=97; i<=122; i++) {
-            alphabet.put((char)i, 0);
+        for (char i='a'; i<='z'; i++) {
+            alphabet.put(i, 0);
         }
 
         // 알파벳 개수 세기
