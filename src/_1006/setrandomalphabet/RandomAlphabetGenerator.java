@@ -1,4 +1,4 @@
-package _1006.randomalphabet;
+package _1006.setrandomalphabet;
 
 public class RandomAlphabetGenerator {
     public int generate() {

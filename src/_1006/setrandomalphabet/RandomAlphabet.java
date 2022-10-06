@@ -1,4 +1,4 @@
-package _1006.randomalphabet;
+package _1006.setrandomalphabet;
 
 import java.util.HashSet;
 import java.util.Set;
