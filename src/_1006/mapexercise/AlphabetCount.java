@@ -7,6 +7,7 @@ public class AlphabetCount {
     public static boolean isAlphabet(char c) {
         return (c >= 'a' && c <= 'z');
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("문자열을 입력하세요: ");
