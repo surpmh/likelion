@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class AlphabetCount {
     public static boolean isAlphabet(char c) {
-        return ((int)c >= 97 && (int)c <= 122);
+        return (c >= 'a' && c <= 'z');
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
