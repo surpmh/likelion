@@ -1,11 +1,12 @@
-package codeup.day2.problem1018;
+package codeup.Day2.problem1013;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String time = sc.next();
-        System.out.println(time);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        System.out.printf("%d %d", a, b);
     }
 }

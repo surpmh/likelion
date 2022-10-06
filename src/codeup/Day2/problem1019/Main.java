@@ -1,4 +1,4 @@
-package codeup.day2.problem1019;
+package codeup.Day2.problem1019;
 
 import java.util.Scanner;
 
