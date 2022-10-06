@@ -10,5 +10,15 @@ public class CurrentDirectory {
         for (File file : files) {
             System.out.println(file);
         }
+
+        /*
+        출력 결과
+        ./out
+        ./.gitignore
+        ./.git
+        ./java-exercise.iml
+        ./.idea
+        ./src
+         */
     }
 }
