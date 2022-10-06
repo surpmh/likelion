@@ -1,4 +1,4 @@
-package _1006.list;
+package _1006.studentlist;
 
 import java.util.ArrayList;
 import java.util.List;
