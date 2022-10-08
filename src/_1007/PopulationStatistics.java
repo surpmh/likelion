@@ -94,13 +94,49 @@ public class PopulationStatistics {
         return moveCntMap;
     }
 
+    public Map<String, Integer> heatmapIdxMap(){
+        Map<String, Integer> map = new HashMap<>();
+        map.put("11", 0);
+        map.put("26", 1);
+        map.put("27", 2);
+        map.put("28", 3);
+        map.put("29", 4);
+        map.put("30", 5);
+        map.put("31", 6);
+        map.put("36", 7);
+        map.put("41", 8);
+        map.put("42", 9);
+        map.put("43", 10);
+        map.put("44", 11);
+        map.put("45", 12);
+        map.put("46", 13);
+        map.put("47", 14);
+        map.put("48", 15);
+        map.put("50", 16);
+
+        return map;
+    }
+
     public static void main(String[] args) throws IOException {
         String address = "./src/_1007/from_to.txt";
-        PopulationStatistics populationsStatistics = new PopulationStatistics();
-        List<PopulationMove> pml = populationsStatistics.readByLine1(address);
+        PopulationStatistics ps = new PopulationStatistics();
+        List<PopulationMove> pml = ps.readByLine1(address);
 
-        Map<String, Integer> map = populationsStatistics.getMoveCntMap(pml);
-        System.out.println(map);
+        Map<String, Integer> map = ps.getMoveCntMap(pml);
+        Map<String, Integer> heatMapIdxMap = ps.heatmapIdxMap();
+
+        String targetFilename = "./src/_1007/for_heatmap.txt";
+        ps.createAFile(targetFilename);
+        List<String> cntResult = new ArrayList<>();
+
+        for(String key:map.keySet()){
+            String[] fromto = key.split(",");
+            //매핑 후 저장
+            String s = String.format("[%s, %s, %d],\\n", heatMapIdxMap.get(fromto[0]),heatMapIdxMap.get(fromto[1]),map.get(key));
+            cntResult.add(s);
+        }
+        ps.write(cntResult, targetFilename);
+
 
 //        System.out.println(pml.size());
 //        for (PopulationMove pm : pml) {
