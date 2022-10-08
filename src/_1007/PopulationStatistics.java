@@ -129,10 +129,10 @@ public class PopulationStatistics {
         ps.createAFile(targetFilename);
         List<String> cntResult = new ArrayList<>();
 
-        for(String key:map.keySet()){
+        for(String key : map.keySet()){
             String[] fromto = key.split(",");
-            //매핑 후 저장
-            String s = String.format("[%s, %s, %d],\\n", heatMapIdxMap.get(fromto[0]),heatMapIdxMap.get(fromto[1]),map.get(key));
+            // String s = String.format("[%s, %s, %d],\\n", heatMapIdxMap.get(fromto[0]),heatMapIdxMap.get(fromto[1]),map.get(key));
+            String s = String.format("key:%s value:%d\n",key,map.get(key));
             cntResult.add(s);
         }
         ps.write(cntResult, targetFilename);
