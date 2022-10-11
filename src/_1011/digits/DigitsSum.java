@@ -8,18 +8,20 @@ public class DigitsSum {
         int n = sc.nextInt();
         int sum = 0;
 
-        while (true) {
-            sum = 0;
-            while (n != 0) {
-                sum += n % 10;
-                n /= 10;
-            }
-            if (sum / 10 == 0){
-                break;
-            } else {
-                n = sum;
-            }
-        }
+//        while (true) {
+//            sum = 0;
+//            while (n != 0) {
+//                sum += n % 10;
+//                n /= 10;
+//            }
+//            if (sum / 10 == 0){
+//                break;
+//            } else {
+//                n = sum;
+//            }
+//        }
+
+        sum = n == 0 ? 0 : 1 + ((n - 1) % 9);
         System.out.println(sum);
     }
 }
