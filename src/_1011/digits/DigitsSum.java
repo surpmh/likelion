@@ -6,7 +6,7 @@ public class DigitsSum {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int sum = 0;
+        int sum = n == 0 ? 0 : 1 + ((n - 1) % 9);
 
 //        while (true) {
 //            sum = 0;
@@ -21,7 +21,6 @@ public class DigitsSum {
 //            }
 //        }
 
-        sum = n == 0 ? 0 : 1 + ((n - 1) % 9);
         System.out.println(sum);
     }
 }
