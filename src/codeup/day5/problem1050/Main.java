@@ -10,3 +10,5 @@ public class Main {
         System.out.println(a == b ? 1 : 0);
     }
 }
+
+
