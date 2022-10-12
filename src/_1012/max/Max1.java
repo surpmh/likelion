@@ -1,4 +1,4 @@
-package _1012.algorithm;
+package _1012.max;
 
 import java.util.ArrayList;
 import java.util.Scanner;
