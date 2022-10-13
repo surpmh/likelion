@@ -9,7 +9,7 @@ public class Hospital {
     private String name;
     private String subdivision;
 
-    public Hospital(String id, String address, String category, Integer emergencyRoom, String name) {
+    public Hospital(String id, String address, String category, Integer emergencyRoom, String name, String subdivision) {
         this.id = id;
         this.address = address;
         String[] splitted = this.address.split(" ");
@@ -17,6 +17,7 @@ public class Hospital {
         this.category = category;
         this.emergencyRoom = emergencyRoom;
         this.name = name;
+        this.subdivision = subdivision;
     }
 
     public String getId() {
