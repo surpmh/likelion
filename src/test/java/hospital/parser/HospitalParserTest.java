@@ -40,13 +40,7 @@ class HospitalParserTest {
         String sql = "INSERT INTO `likelion-db`.`seoul_hospital`\n" +
                 "(`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)\n" +
                 "VALUES\n" +
-                "(\"A1120837\",\n" +
-                "\"서울특별시 금천구 벚꽃로 286 삼성리더스타워 111~114호 (가산동)\",\n" +
-                "\"서울특별시 금천구\",\n" +
-                "\"C\",\n" +
-                "2,\n" +
-                "\"가산기대찬의원\",\n" +
-                "\"\");";
+                "(\"A1120837\", \"서울특별시 금천구 벚꽃로 286 삼성리더스타워 111~114호 (가산동)\", \"서울특별시 금천구\", \"C\", 2, \"가산기대찬의원\", \"\");";
         Assertions.assertEquals(sql, hospital.getSqlInsertQuery());
     }
 }
