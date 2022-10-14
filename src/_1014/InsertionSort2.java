@@ -1,29 +1,29 @@
 package _1014;
 
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class InsertionSort2 {
+    public int[] sort(int[] arr, int i) {
+        if (i >= arr.length) {
+            return arr;
+        }
+
+        int key = arr[i];
+        int j = i-1;
+        while (j>=0 && key < arr[j]) {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = key;
+
+        return sort(arr, i+1);
+    }
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[]{1, 7, 3, 9, 28, 11};
+        InsertionSort2 insertionSort = new InsertionSort2();
+        insertionSort.sort(arr, 1);
 
-        int n = sc.nextInt();
-        int[] arr = new int[n];
-        for (int i=0; i<n; i++) {
-            arr[i] = sc.nextInt();
-        }
-
-        for (int i=1; i<arr.length; i++) {
-            int key = arr[i];
-            int j = i-1;
-            while (j>=0 && key < arr[j]) {
-                arr[j+1] = arr[j];
-                j--;
-            }
-            arr[j+1] = key;
-        }
-
-        for (int i=0; i<n; i++) {
-            System.out.println(arr[i]);
-        }
+        System.out.println(Arrays.toString(arr));
     }
 }
