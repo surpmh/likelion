@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class RightTriangle {
     public void star(int n) {
-        for (int i=0; i<4; i++) {
+        for (int i=0; i<n; i++) {
             for (int j=0; j<=i; j++) {
                 System.out.print("* ");
             }
@@ -15,7 +15,7 @@ public class RightTriangle {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         RightTriangle rightTriangle = new RightTriangle();
-        int num = sc.nextInt();
-        rightTriangle.star(num);
+        int n = sc.nextInt();
+        rightTriangle.star(n);
     }
 }
