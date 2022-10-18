@@ -6,14 +6,9 @@ import java.sql.*;
 import java.util.Map;
 
 public class UserDao {
-    public void add(User user) throws SQLException, ClassNotFoundException {
-        Map<String, String> env = System.getenv();
-        String dbHost = env.get("DB_HOST");
-        String dbUser = env.get("DB_USER");
-        String dbPassword = env.get("DB_PASSWORD");
+    public void add(User user) throws ClassNotFoundException, SQLException {
+        Connection c = makeConnection();
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection c = DriverManager.getConnection(dbHost, dbUser, dbPassword);
         PreparedStatement ps = c.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
         ps.setString(1, user.getId());
         ps.setString(2, user.getName());
@@ -25,13 +20,8 @@ public class UserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Map<String, String> env = System.getenv();
-        String dbHost = env.get("DB_HOST");
-        String dbUser = env.get("DB_USER");
-        String dbPassword = env.get("DB_PASSWORD");
+        Connection c = makeConnection();
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection c = DriverManager.getConnection(dbHost, dbUser, dbPassword);
         PreparedStatement ps = c.prepareStatement("SELECT * FROM users WHERE id = ?");
         ps.setString(1, id);
         ResultSet rs = ps.executeQuery();
@@ -44,6 +34,18 @@ public class UserDao {
         ps.close();
         c.close();
         return user;
+    }
+
+    private Connection makeConnection() throws ClassNotFoundException, SQLException {
+        Map<String, String> env = System.getenv();
+        String dbHost = env.get("DB_HOST");
+        String dbUser = env.get("DB_USER");
+        String dbPassword = env.get("DB_PASSWORD");
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection c = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+
+        return c;
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
