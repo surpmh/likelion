@@ -3,11 +3,21 @@ package _1018;
 import java.util.Scanner;
 
 public class Triangle {
+    public void printStar(int cnt) {
+        if (cnt <=0) {
+            return;
+        }
+        System.out.print("*");
+
+        printStar(cnt-1);
+    }
     public void printTriangle(int n, int i) {
         if (n < i) {
             return;
         }
-        System.out.println("*".repeat(i));
+        Triangle triangle = new Triangle();
+        triangle.printStar(i);
+        System.out.println();
         printTriangle(n, i+1);
     }
 
