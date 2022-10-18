@@ -1,4 +1,4 @@
-package com.dbexercise;
+package com.dbexercise.dao;
 
 import com.dbexercise.domain.User;
 
@@ -13,15 +13,15 @@ public class UserDao {
         String dbPassword = env.get("DB_PASSWORD");
 
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
+        Connection c = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+        PreparedStatement ps = c.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
         ps.setString(1, "1");
         ps.setString(2, "Ayeong");
         ps.setString(3, "1234");
 
         int status = ps.executeUpdate();
         ps.close();
-        conn.close();
+        c.close();
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
@@ -31,22 +31,25 @@ public class UserDao {
         String dbPassword = env.get("DB_PASSWORD");
 
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+        Connection c = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM users WHERE id = ?");
         ps.setString(1, id);
         ResultSet rs = ps.executeQuery();
         rs.next();
-        User user = new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
+        User user = new User();
+        user.setId(rs.getString("id"));
+        user.setName(rs.getString("name"));
+        user.setPassword(rs.getString("password"));
         rs.close();
         ps.close();
-        conn.close();
+        c.close();
         return user;
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         UserDao userDao = new UserDao();
-        // userDao.add();
-        User user = userDao.get("1");
+        userDao.add();
+        User user = userDao.get("2");
         System.out.println(user.getName());
     }
 }
