@@ -6,20 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class UserDaoTest {
 
     @Test
     void addAndSelect() throws SQLException, ClassNotFoundException {
-        AWSUserDaoImpl userDao = new AWSUserDaoImpl();
-        User user = new User();
-        user.setId("2");
-        user.setName("Ayeong");
-        user.setPassword("123");
-        userDao.add(user);
+       UserDao userDao = new UserDao(new DConnectionMaker());
+       String id = "1";
+       userDao.add(new User("1", "Ayeong", "1234"));
 
-        User selectedUser = userDao.get(user.getId());
-        Assertions.assertEquals("Ayeong", selectedUser.getName());
+       User user = userDao.get(id);
+        Assertions.assertEquals("Ayeong", user.getName());
     }
 }
