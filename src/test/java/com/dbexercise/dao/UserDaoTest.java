@@ -14,7 +14,7 @@ class UserDaoTest {
        String id = "1";
        userDao.add(new User("1", "Ayeong", "1234"));
 
-       User user = userDao.get(id);
+       User user = userDao.findById(id);
         Assertions.assertEquals("Ayeong", user.getName());
     }
 }
