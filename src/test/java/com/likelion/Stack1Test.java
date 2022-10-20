@@ -3,7 +3,7 @@ package com.likelion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class StackTest {
+class Stack1Test {
     @Test
     void pushTest() {
         Stack1 stack = new Stack1(10);
