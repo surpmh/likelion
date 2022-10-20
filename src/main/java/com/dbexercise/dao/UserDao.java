@@ -1,6 +1,7 @@
 package com.dbexercise.dao;
 
 import com.dbexercise.domain.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
 
@@ -8,7 +9,7 @@ public class UserDao {
     private ConnectionMaker connectionMaker;
 
     public UserDao() {
-        this.connectionMaker = new DConnectionMaker();
+        this.connectionMaker = new AWSConnectionMaker();
     }
 
     public UserDao(ConnectionMaker connectionMaker) {
@@ -65,6 +66,8 @@ public class UserDao {
         rs.close();
         ps.close();
         c.close();
+
+        if(user == null) throw new EmptyResultDataAccessException(1);
 
         return user;
     }
