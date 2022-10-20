@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.EmptyStackException;
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,5 +47,16 @@ class Stack2Test {
         assertFalse(st.isEmpty());
         st.pop();
         assertTrue(st.isEmpty());
+    }
+
+    @Test
+    void peek() {
+        Stack2 st = new Stack2();
+        assertThrows(EmptyStackException.class, ()-> {
+            st.peek();
+        });
+        st.push(10);
+        int peeked = st.peek();
+        assertEquals(10, peeked);
     }
 }
