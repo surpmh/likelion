@@ -62,7 +62,7 @@ class UserDaoTest {
     @Test
     void findById() {
         assertThrows(EmptyResultDataAccessException.class, () -> {
-            userDao.findById("30");
+           userDao.findById("30");
         });
     }
 }
