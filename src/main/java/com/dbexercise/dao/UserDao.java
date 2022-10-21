@@ -22,7 +22,8 @@ public class UserDao {
 
         try {
             c = connectionMaker.makeConnection();
-            ps = c.prepareStatement("delete from users");
+            ps = new DeleteAllStrategy().makePreparedStatement(c);
+            // ps = c.prepareStatement("delete from users");
             ps.executeUpdate();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -51,7 +52,7 @@ public class UserDao {
         int count = 0;
         try {
             c = connectionMaker.makeConnection();
-            ps = c.prepareStatement("select count(*) from users");
+            ps = new DeleteAllStrategy().makePreparedStatement(c);
             rs = ps.executeQuery();
             rs.next();
             count = rs.getInt(1);
