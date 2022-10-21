@@ -1,4 +1,4 @@
-package com.likelion;
+package com.likelion.stack;
 
 import com.likelion.stack.Stack1;
 import org.junit.jupiter.api.Assertions;

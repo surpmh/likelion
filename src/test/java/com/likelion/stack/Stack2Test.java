@@ -1,4 +1,4 @@
-package com.likelion;
+package com.likelion.stack;
 
 import com.likelion.stack.Stack2;
 import org.junit.jupiter.api.BeforeEach;
