@@ -16,18 +16,15 @@ public class UserDao {
         this.connectionMaker = connectionMaker;
     }
 
-    public void deleteAll() throws SQLException, ClassNotFoundException {
+    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
         Connection c = null;
         PreparedStatement ps = null;
 
         try {
             c = connectionMaker.makeConnection();
-            ps = new DeleteAllStrategy().makePreparedStatement(c);
-            // ps = c.prepareStatement("delete from users");
+            ps = stmt.makePreparedStatement(c);
             ps.executeUpdate();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         } finally {
             if (ps != null) {
@@ -45,6 +42,12 @@ public class UserDao {
         }
     }
 
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+        Connection c = null;
+        PreparedStatement ps = null;
+        jdbcContextWithStatementStrategy(new DeleteAllStrategy());
+    }
+
     public int getCount() throws SQLException, ClassNotFoundException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -52,7 +55,7 @@ public class UserDao {
         int count = 0;
         try {
             c = connectionMaker.makeConnection();
-            ps = new DeleteAllStrategy().makePreparedStatement(c);
+            ps = c.prepareStatement("SELECT COUNT(*) FROM users");
             rs = ps.executeQuery();
             rs.next();
             count = rs.getInt(1);
