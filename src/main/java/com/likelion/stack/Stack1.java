@@ -1,4 +1,4 @@
-package com.likelion;
+package com.likelion.stack;
 
 public class Stack1 {
     private int[] arr;
