@@ -50,7 +50,6 @@ class UserDaoTest {
 
         userDao.deleteAll();
         assertEquals(0, userDao.getCount());
-
         userDao.add(user1);
         assertEquals(1, userDao.getCount());
         userDao.add(user2);
