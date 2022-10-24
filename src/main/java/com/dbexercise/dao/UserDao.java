@@ -7,42 +7,22 @@ import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
-    private DataSource dataSource;
+    private final DataSource dataSource;
+    private final JdbcContext jdbcContext;
+
 
     public UserDao(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) {
-        Connection c = null;
-        PreparedStatement ps = null;
-
-        try {
-            c = dataSource.getConnection();
-            ps = stmt.makePreparedStatement(c);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (c != null) {
-                try {
-                    c.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
+        this.jdbcContext = new JdbcContext(dataSource);
     }
 
     public void deleteAll() throws SQLException {
-        Connection c = null;
-        PreparedStatement ps = null;
-        jdbcContextWithStatementStrategy(new DeleteAllStrategy());
+        jdbcContext.jdbcContextWithStatementStrategy(new StatementStrategy() {
+            @Override
+            public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+                return c.prepareStatement("delete from users");
+            }
+        });
     }
 
     public int getCount() {
@@ -82,9 +62,19 @@ public class UserDao {
         return count;
     }
 
-    public void add(final User user) throws ClassNotFoundException, SQLException {
-        AddStrategy addStrategy = new AddStrategy(user);
-        jdbcContextWithStatementStrategy(addStrategy);
+    public void add(final User user) throws SQLException {
+        jdbcContext.jdbcContextWithStatementStrategy(new StatementStrategy() {
+            @Override
+            public PreparedStatement makePreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = null;
+                ps = connection.prepareStatement("INSERT INTO users(id, name, password) values(?, ?, ?)");
+                ps.setString(1, user.getId());
+                ps.setString(2, user.getName());
+                ps.setString(3, user.getPassword());
+
+                return ps;
+            }
+        });
     }
 
     public User findById(String id) throws SQLException {
