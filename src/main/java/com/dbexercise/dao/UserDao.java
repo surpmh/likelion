@@ -3,28 +3,25 @@ package com.dbexercise.dao;
 import com.dbexercise.domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
-    private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
 
-    public UserDao() {
-        this.connectionMaker = new AWSConnectionMaker();
+    public UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
-    }
-
-    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
+    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) {
         Connection c = null;
         PreparedStatement ps = null;
 
         try {
-            c = connectionMaker.makeConnection();
+            c = dataSource.getConnection();
             ps = stmt.makePreparedStatement(c);
             ps.executeUpdate();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             if (ps != null) {
@@ -42,25 +39,23 @@ public class UserDao {
         }
     }
 
-    public void deleteAll() throws SQLException, ClassNotFoundException {
+    public void deleteAll() throws SQLException {
         Connection c = null;
         PreparedStatement ps = null;
         jdbcContextWithStatementStrategy(new DeleteAllStrategy());
     }
 
-    public int getCount() throws SQLException, ClassNotFoundException {
+    public int getCount() {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         int count = 0;
         try {
-            c = connectionMaker.makeConnection();
+            c = dataSource.getConnection();
             ps = c.prepareStatement("SELECT COUNT(*) FROM users");
             rs = ps.executeQuery();
             rs.next();
             count = rs.getInt(1);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -92,8 +87,8 @@ public class UserDao {
         jdbcContextWithStatementStrategy(addStrategy);
     }
 
-    public User findById(String id) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+    public User findById(String id) throws SQLException {
+        Connection c = dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement("SELECT * FROM users WHERE id = ?");
         ps.setString(1, id);
