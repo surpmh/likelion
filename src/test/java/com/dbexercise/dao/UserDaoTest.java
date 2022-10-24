@@ -22,6 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserDaoTest {
 
     UserDao userDao;
+    User user1 = new User("1", "name1", "123");
+    User user2 = new User("2", "name2", "123");
+    User user3 = new User("3", "name3", "123");
+
     @Autowired
     ApplicationContext context;
 
@@ -46,10 +50,6 @@ class UserDaoTest {
 
     @Test
     void getCountTest() throws SQLException {
-        User user1 = new User("1", "name1", "123");
-        User user2 = new User("2", "name2", "123");
-        User user3 = new User("3", "name3", "123");
-
         userDao.deleteAll();
         assertEquals(0, userDao.getCount());
         userDao.add(user1);
@@ -70,10 +70,6 @@ class UserDaoTest {
     @Test
     @DisplayName("없을때 빈 리스트, 있을때 개수만큼 리턴")
     void getAllTest() throws SQLException {
-        User user1 = new User("1", "name1", "123");
-        User user2 = new User("2", "name2", "123");
-        User user3 = new User("3", "name3", "123");
-
         userDao.deleteAll();
         List<User> users = userDao.getAll();
         assertEquals(0, users.size());

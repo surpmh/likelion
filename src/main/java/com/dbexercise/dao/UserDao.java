@@ -32,7 +32,7 @@ public class UserDao {
     }
 
     public int getCount() throws SQLException {
-        return this.jdbcTemplate.queryForObject("SELECT count(*) FROM users;", Integer.class);
+        return this.jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users;", Integer.class);
     }
 
     public User findById(String id) throws SQLException {
