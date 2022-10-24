@@ -2,6 +2,7 @@ package com.dbexercise.dao;
 
 import com.dbexercise.domain.User;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,8 +31,8 @@ class UserDaoTest {
     }
 
     @Test
-    void addAndGet() throws SQLException, ClassNotFoundException {
-        User user1 = new User("1", "name", "1234");
+    void addAndGetTest() throws SQLException {
+        User user1 = new User("1", "name1", "123");
 
         userDao.deleteAll();
         assertEquals(0, userDao.getCount());
@@ -38,12 +40,12 @@ class UserDaoTest {
         userDao.add(user1);
         assertEquals(1, userDao.getCount());
         User user = userDao.findById(user1.getId());
-        assertEquals("name", user.getName());
-        assertEquals("1234", user.getPassword());
+        assertEquals("name1", user.getName());
+        assertEquals("123", user.getPassword());
     }
 
     @Test
-    void count() throws SQLException, ClassNotFoundException {
+    void getCountTest() throws SQLException {
         User user1 = new User("1", "name1", "123");
         User user2 = new User("2", "name2", "123");
         User user3 = new User("3", "name3", "123");
@@ -59,9 +61,27 @@ class UserDaoTest {
     }
 
     @Test
-    void findById() {
+    void findByIdTest() throws SQLException {
         assertThrows(EmptyResultDataAccessException.class, () -> {
            userDao.findById("30");
         });
     }
+
+    @Test
+    @DisplayName("없을때 빈 리스트, 있을때 개수만큼 리턴")
+    void getAllTest() throws SQLException {
+        User user1 = new User("1", "name1", "123");
+        User user2 = new User("2", "name2", "123");
+        User user3 = new User("3", "name3", "123");
+
+        userDao.deleteAll();
+        List<User> users = userDao.getAll();
+        assertEquals(0, users.size());
+        userDao.add(user1);
+        userDao.add(user2);
+        userDao.add(user3);
+        users = userDao.getAll();
+        assertEquals(3, users.size());
+    }
+
 }
