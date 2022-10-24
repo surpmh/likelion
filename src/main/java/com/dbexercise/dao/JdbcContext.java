@@ -12,13 +12,13 @@ public class JdbcContext {
         this.dataSource = dataSource;
     }
 
-    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) {
+    public void jdbcContextWithStatementStrategy(StatementStrategy s) {
         Connection c = null;
         PreparedStatement ps = null;
 
         try {
             c = dataSource.getConnection();
-            ps = stmt.makePreparedStatement(c);
+            ps = s.makePreparedStatement(c);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

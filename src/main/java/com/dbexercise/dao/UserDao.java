@@ -10,7 +10,6 @@ public class UserDao {
     private final DataSource dataSource;
     private final JdbcContext jdbcContext;
 
-
     public UserDao(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcContext = new JdbcContext(dataSource);
