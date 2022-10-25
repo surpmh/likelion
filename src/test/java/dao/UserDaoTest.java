@@ -17,16 +17,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = UserDaoFactory.class)
 class UserDaoTest {
-    UserDao userDao;
-    User user1 = new User("1", "name1", "1234");
-    User user2 = new User("2", "name2", "1234");
-    User user3 = new User("3", "name3", "1234");
+    private UserDao userDao;
+    private User user1;
+    private User user2;
+    private User user3;
     @Autowired
     ApplicationContext context;
 
     @BeforeEach
     void setUp() {
         this.userDao = context.getBean("awsUserDao", UserDao.class);
+        this.user1 = new User("1", "name1", "1234");
+        this.user2 = new User("2", "name2", "1234");
+        this.user3 = new User("3", "name3", "1234");
     }
 
     @Test
