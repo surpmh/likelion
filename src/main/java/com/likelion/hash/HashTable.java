@@ -39,6 +39,6 @@ public class HashTable {
         for (int i = 0; i < names.length; i++) {
             ht.insert(names[i], ht.hash(names[i]));
         }
-        ht.search("AyeongChoi");
+        System.out.println(ht.search("AyeongChoi"));
     }
 }
