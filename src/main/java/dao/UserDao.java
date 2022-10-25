@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import domain.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,8 +35,12 @@ public class UserDao {
         ps.setString(1, id);
 
         ResultSet rs = ps.executeQuery();
-        rs.next();
-        User user = new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
+        User user = null;
+        if(rs.next()) {
+            user = new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
+        } else {
+            throw new EmptyResultDataAccessException(1);
+        }
 
         rs.close();
         ps.close();
@@ -43,4 +48,30 @@ public class UserDao {
 
         return user;
     }
+
+    public int getCount() throws SQLException {
+        Connection c = connectionMaker.makeConnection();
+        PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users");
+
+        ResultSet rs = ps.executeQuery();
+
+        rs.next();
+
+        int count = rs.getInt(1);
+
+        ps.close();
+        c.close();
+
+        return count;
+    }
+
+   public void deleteAll() throws SQLException {
+       Connection c = connectionMaker.makeConnection();
+       PreparedStatement ps = c.prepareStatement("DELETE FROM users");
+
+       ps.executeUpdate();
+
+       ps.close();
+       c.close();
+   }
 }
