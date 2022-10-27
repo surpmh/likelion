@@ -5,20 +5,28 @@ import java.util.HashMap;
 class Player {
     public String solution(String[] participant, String[] completion) {
         HashMap<String, Integer> players = new HashMap<>();
+        String answer = "";
 
-        for (String key : participant) {
-            players.put(key, 1);
+        for (String p : participant) {
+            players.put(p, players.getOrDefault(p, 0) + 1);
         }
 
-        for (String key : completion) {
-            players.put(key, 0);
+        for (String c : completion) {
+            players.put(c, players.get(c) - 1);
         }
 
         for (String key : players.keySet()) {
-            if (players.get(key) == 1) {
-                return key;
+            if (players.get(key) != 0) {
+                answer = key;
             }
         }
-        return "";
+        return answer;
+    }
+
+    public static void main(String[] args) {
+        Player player = new Player();
+        String[] participant = {"mislav", "stanko", "mislav", "ana"};
+        String[] completion = {"stanko", "ana", "mislav"};
+        System.out.println(player.solution(participant, completion));
     }
 }
