@@ -1,5 +1,6 @@
 package com.springboot.hello.controller;
 
+import com.springboot.hello.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -12,12 +13,17 @@ public class PostController {
         return "Hello Post API";
     }
 
-    @PostMapping(value = "/member")
+    @PostMapping(value = "/member1")
     public String postMember(@RequestBody Map<String, Object> postData) {
         StringBuilder sb = new StringBuilder();
         postData.entrySet().forEach((map) -> {
             sb.append(map.getKey() + " : " + map.getValue() + "\n");
         });
         return sb.toString();
+    }
+
+    @PostMapping(value = "/member2")
+    public String postMemberDto(@RequestBody MemberDto memberDto) {
+        return memberDto.toString();
     }
 }
