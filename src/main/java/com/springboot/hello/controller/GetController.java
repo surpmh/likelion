@@ -12,6 +12,7 @@ import java.util.Map;
 public class GetController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
+        log.info("hello로 요청이 들어왔습니다.");
         return "Hello World";
     }
 
@@ -22,7 +23,6 @@ public class GetController {
 
     @GetMapping(value = "/variable1/{variable}")
     public String getVariable1(@PathVariable String variable) {
-        log.info("getVariable1으로 요청이 들어왔습니다. variable:{}", variable);
         return variable;
     }
 
