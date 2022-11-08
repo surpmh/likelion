@@ -24,24 +24,24 @@ public class ArticleController {
         this.articleRepository = articleRepository;
     }
 
-    @GetMapping(value = "/new")
+    @GetMapping("/new")
     public String newArticleForm() {
         return "articles/new";
     }
 
-    @GetMapping(value = "")
+    @GetMapping("")
     public String index() {
         return "redirect:/articles/list";
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping("/list")
     public String listArticle(Model model) {
         List<Article> articles = articleRepository.findAll();
         model.addAttribute("articles", articles);
         return "articles/list";
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public String selectArticle(@PathVariable Long id, Model model) {
         Optional<Article> optArticle = articleRepository.findById(id);
 
@@ -53,7 +53,7 @@ public class ArticleController {
         }
     }
 
-    @PostMapping(value = "/posts")
+    @PostMapping("/posts")
     public String createArticle(ArticleDto form) {
         log.info(form.toString());      // 로그 남기기
         Article article = form.toEntity();
