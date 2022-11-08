@@ -15,10 +15,10 @@ public class Article {
     @GeneratedValue
     private Long id;
     private String title;
-    private String contents;
+    private String content;
 
-    public Article(String title, String contents) {
+    public Article(String title, String content) {
         this.title = title;
-        this.contents = contents;
+        this.content = content;
     }
 }
