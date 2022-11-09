@@ -2,7 +2,7 @@
 <!--- action /articles/posts url로 던질 것이고 method은 post -->
 <!--- ArticleController 에서 postmapping과 동일한 url 입니다 --->
 {{#article}}
-<form class="container" action="/articles/{{id}}" method="put">
+<form class="container" action="/articles/{{id}}/update" method="post">
     <div class="mb-3">
         <label class="form-label">제목</label>
         <!--- name 속성안에 Dto의 필드명을 써주면 된다 -->
@@ -14,8 +14,9 @@
         <textarea class="form-control" rows="3" name="content">{{content}}</textarea>
     </div>
     <button type="submit" class="btn btn-outline-success">수정</button>
+    <a href="/articles/{{id}}" class="btn btn-outline-primary">돌아가기</a>
     <!--- 리다이렉트 전체 조회페이지로 이동 기능 a태그로 --->
-    <a href="/articles" class="btn btn-outline-dark">목록</a>
+    <a href="/articles" class="btn btn-outline-primary">목록</a>
 </form>
 {{/article}}
 {{>layouts/footer}}
