@@ -11,14 +11,17 @@ class SelectionSortTest {
 
     @Test
     void sort() {
-        int[] arr = {1, 7, 3, 9, 28, 11};
+        int[] arr = {2, 7, 4, 9, 10, 223, 111, 23, 3, 39};
         SelectionSort selectionSort = new SelectionSort();
-        selectionSort.sort(arr);
-        int[] sortedArr = {1, 3, 7, 9, 11, 28};
 
-        Assertions.assertEquals(sortedArr[0], arr[0]);
-        Assertions.assertEquals(sortedArr[2], arr[2]);
-        Assertions.assertEquals(sortedArr[5], arr[5]);
+        selectionSort.sort(arr, (a, b) -> a > b);
+        Assertions.assertEquals(2, arr[0]);
+        Assertions.assertEquals(3, arr[1]);
+        Assertions.assertEquals(4, arr[2]);
 
+        selectionSort.sort(arr, (a, b) -> a < b);
+        Assertions.assertEquals(223, arr[0]);
+        Assertions.assertEquals(111, arr[1]);
+        Assertions.assertEquals(39, arr[2]);
     }
 }
