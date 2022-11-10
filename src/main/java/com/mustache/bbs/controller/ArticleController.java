@@ -53,9 +53,9 @@ public class ArticleController {
         }
     }
     @PostMapping("/posts")
-    public String createArticle(ArticleDto form) {
-        log.info(form.toString());      // 로그 남기기
-        Article article = form.toEntity();
+    public String createArticle(ArticleDto articleDto) {
+        log.info(articleDto.toString());      // 로그 남기기
+        Article article = articleDto.toEntity();
         articleRepository.save(article);
         return String.format("redirect:/articles/%d", article.getId());
     }
@@ -75,7 +75,8 @@ public class ArticleController {
     @PostMapping("{id}/update")
     public String update(@PathVariable Long id, ArticleDto articleDto, Model model) {
         log.info("title:{} content:{}", articleDto.getTitle(), articleDto.getContent());
-        Article article = articleRepository.save(articleDto.toEntity());
+        Article article = articleDto.toEntity();
+        articleRepository.save(article);
         model.addAttribute("article", article);
         return String.format("redirect:/articles/%d", article.getId());
     }
