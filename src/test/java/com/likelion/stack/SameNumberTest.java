@@ -3,13 +3,11 @@ package com.likelion.stack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SameNumberTest {
 
     @Test
     void solution() {
-        SameNumber sn = new SameNumber();
+        HateSameNumberStack sn = new HateSameNumberStack();
         int[] arr = {1,1,3,3,0,1,1};
         int[] answer = sn.solution(arr);
 

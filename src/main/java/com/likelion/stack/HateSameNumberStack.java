@@ -2,7 +2,7 @@ package com.likelion.stack;
 
 import java.util.*;
 
-public class SameNumber {
+public class HateSameNumberStack {
     public int[] solution(int []arr) {
         Stack<Integer> stack = new Stack<>();
 
