@@ -28,6 +28,6 @@ public class HospitalController {
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
 
-        return "hospital/list";
+        return "hospitals/list";
     }
 }
