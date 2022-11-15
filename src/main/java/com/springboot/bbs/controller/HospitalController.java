@@ -20,7 +20,7 @@ public class HospitalController {
         this.hospitalRepository = hospitalRepository;
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public String list(Model model, Pageable pageable) {
         Page<Hospital> hospitals = hospitalRepository.findAll(pageable);
         log.info("size:{}", hospitals.getSize());
