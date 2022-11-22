@@ -3,7 +3,7 @@ package com.likelion.codeup;
 import java.util.Scanner;
 
 public class RecursiveSum {
-    public int sumNum(int n) {
+    public static int sumNum(int n) {
         if (n <= 0) {
             return n;
         }
@@ -13,7 +13,6 @@ public class RecursiveSum {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        RecursiveSum rs = new RecursiveSum();
-        System.out.println(rs.sumNum(n));
+        System.out.println(sumNum(n));
     }
 }
