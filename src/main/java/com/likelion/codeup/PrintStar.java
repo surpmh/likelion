@@ -3,7 +3,7 @@ package com.likelion.codeup;
 import java.util.Scanner;
 
 public class PrintStar {
-    public void star(int n) {
+    public static void star(int n) {
         if (n == 0) {
             return;
         }
@@ -14,7 +14,6 @@ public class PrintStar {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        PrintStar ps = new PrintStar();
-        ps.star(n);
+        star(n);
     }
 }
