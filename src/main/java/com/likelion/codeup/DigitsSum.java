@@ -3,7 +3,7 @@ package com.likelion.codeup;
 import java.util.Scanner;
 
 public class DigitsSum {
-    public Long digit(Long n) {
+    public static Long digit(Long n) {
         if (n <= 0) {
             return n;
         }
@@ -13,7 +13,6 @@ public class DigitsSum {
         Scanner sc = new Scanner(System.in);
         Long n = sc.nextLong();
 
-        DigitsSum ds = new DigitsSum();
-        System.out.println(ds.digit(n));
+        System.out.println(digit(n));
     }
 }
