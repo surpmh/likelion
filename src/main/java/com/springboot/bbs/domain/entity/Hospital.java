@@ -3,10 +3,8 @@ package com.springboot.bbs.domain.entity;
 import com.springboot.bbs.domain.dto.HospitalResponse;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "nation_wide_hospitals")
@@ -42,6 +40,9 @@ public class Hospital {
 
     @Column(name = "total_area_size")
     private Float totalAreaSize;
+
+    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
+    private List<Review> reviews;
 
     // HospitalEntity를 HospitalResponse DTO로 만들기
     public static HospitalResponse of(Hospital hospital) {
