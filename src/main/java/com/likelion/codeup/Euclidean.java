@@ -10,11 +10,11 @@ public class Euclidean {
     }
 
     public static int euclidean(int a, int b) {
-        int c;
+        int r;
         while (b != 0) {
-            c = a % b;
+            r = a % b;
             a = b;
-            b = c;
+            b = r;
         }
         return a;
     }
@@ -24,7 +24,7 @@ public class Euclidean {
         int a = sc.nextInt();
         int b = sc.nextInt();
 
-        if (a < b); swap(a, b);
+        if (a < b) swap(a, b);
 
         System.out.println(euclidean(a, b));
     }
