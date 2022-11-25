@@ -1,5 +1,6 @@
 package com.springboot.bbs.domain.dto;
 
+import com.springboot.bbs.domain.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,5 +15,16 @@ public class ReviewReadResponse {
     private String title;
     private String content;
     private String userName;
-    private String hospitablName;
+    private String hospitalName;
+
+    public static ReviewReadResponse fromEntity(Review review) {
+        ReviewReadResponse response = ReviewReadResponse.builder()
+                .id(review.getId())
+                .title(review.getTitle())
+                .content(review.getContent())
+                .userName(review.getUserName())
+                .hospitalName(review.getHospital().getHospitalName())
+                .build();
+        return response;
+    }
 }

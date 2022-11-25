@@ -2,12 +2,16 @@ package com.springboot.bbs.service;
 
 import com.springboot.bbs.domain.dto.ReviewCreateRequset;
 import com.springboot.bbs.domain.dto.ReviewCreateResponse;
+import com.springboot.bbs.domain.dto.ReviewReadResponse;
 import com.springboot.bbs.domain.entity.Hospital;
 import com.springboot.bbs.domain.entity.Review;
 import com.springboot.bbs.repository.HospitalRepository;
 import com.springboot.bbs.repository.ReviewRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service

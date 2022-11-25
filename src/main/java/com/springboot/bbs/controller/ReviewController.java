@@ -1,5 +1,6 @@
 package com.springboot.bbs.controller;
 
+import com.springboot.bbs.domain.dto.HospitalReadResponse;
 import com.springboot.bbs.domain.dto.ReviewReadResponse;
 import com.springboot.bbs.domain.entity.Review;
 import com.springboot.bbs.service.ReviewService;
@@ -21,13 +22,7 @@ public class ReviewController {
     @GetMapping("/{id}")
     public ResponseEntity<ReviewReadResponse> get(@PathVariable Long id) {
         Review review = reviewService.getReview(id);
-        ReviewReadResponse response = ReviewReadResponse.builder()
-                .id(review.getId())
-                .title(review.getTitle())
-                .content(review.getContent())
-                .userName(review.getUserName())
-                .hospitablName("")
-                .build();
+        ReviewReadResponse response = ReviewReadResponse.fromEntity(review);
         return ResponseEntity.ok().body(response);
     }
 }
