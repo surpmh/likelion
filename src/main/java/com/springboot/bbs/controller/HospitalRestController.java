@@ -1,6 +1,7 @@
 package com.springboot.bbs.controller;
 
 import com.springboot.bbs.domain.dto.*;
+import com.springboot.bbs.domain.entity.Review;
 import com.springboot.bbs.service.HospitalService;
 import com.springboot.bbs.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,10 @@ public class HospitalRestController {
     private final ReviewService reviewService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<HospitalResponse> get(@PathVariable Long id) {
-        HospitalResponse hospitalResponse = hospitalService.getHospital(id);
-        return ResponseEntity.ok().body(hospitalResponse);  // Return은 DTO
+    public ResponseEntity<ReviewReadResponse> get(@PathVariable Long id) {
+        Review review = reviewService.getReview(id);
+        ReviewReadResponse response = ReviewReadResponse.fromEntity(review);
+        return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/{id}/reviews")
