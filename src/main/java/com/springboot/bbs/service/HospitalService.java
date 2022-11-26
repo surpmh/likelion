@@ -3,6 +3,7 @@ package com.springboot.bbs.service;
 import com.springboot.bbs.domain.entity.Hospital;
 import com.springboot.bbs.domain.dto.HospitalResponse;
 import com.springboot.bbs.repository.HospitalRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,7 +16,7 @@ public class HospitalService {
         this.hospitalRepository = hospitalRepository;
     }
 
-    public HospitalResponse getHospital(Integer id) {
+    public HospitalResponse getHospital(Long id) {
         Optional<Hospital> optHospital = hospitalRepository.findById(id);   // Entity
         Hospital hospital = optHospital.get();
         HospitalResponse hospitalResponse = Hospital.of(hospital);      // DTO
@@ -28,5 +29,10 @@ public class HospitalService {
             hospitalResponse.setBusinessStatusName(String.valueOf(hospital.getBusinessStatusCode()));
         }
         return hospitalResponse;
+    }
+
+    public Hospital findById(Long id) {
+        Hospital hospital = hospitalRepository.findById(id).orElseThrow(()->new IllegalArgumentException("id가 없습니다."));
+        return hospital;
     }
 }

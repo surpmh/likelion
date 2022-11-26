@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class Hospital {
     @Id
-    private Integer Id;
+    private Long Id;
 
     @Column(name = "road_name_address")
     private String roadNameAddress;

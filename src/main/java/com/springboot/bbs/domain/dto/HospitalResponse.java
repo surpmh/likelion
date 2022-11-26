@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HospitalResponse {
-    private Integer Id;
+    private Long Id;
     private String roadNameAddress;
     private String hospitalName;
     private Integer patientRoomCount;
