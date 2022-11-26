@@ -1,6 +1,7 @@
 package com.springboot.bbs.controller;
 
 import com.springboot.bbs.domain.dto.*;
+import com.springboot.bbs.domain.entity.Hospital;
 import com.springboot.bbs.domain.entity.Review;
 import com.springboot.bbs.service.HospitalService;
 import com.springboot.bbs.service.ReviewService;
@@ -21,9 +22,9 @@ public class HospitalRestController {
     private final ReviewService reviewService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReviewReadResponse> get(@PathVariable Long id) {
-        Review review = reviewService.getReview(id);
-        ReviewReadResponse response = ReviewReadResponse.fromEntity(review);
+    public ResponseEntity<HospitalReadResponse> get(@PathVariable Long id) {
+        Hospital hospital = hospitalService.findById(id);
+        HospitalReadResponse response = HospitalReadResponse.fromEntity(hospital);
         return ResponseEntity.ok().body(response);
     }
 
