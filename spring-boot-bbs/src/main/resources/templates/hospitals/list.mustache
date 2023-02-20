@@ -1,0 +1,28 @@
+{{>layouts/header}}
+<!--<form class="d-flex container mt-3" role="search">-->
+<!--    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">-->
+<!--    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--</form>-->
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#hospitals}}
+        <tr>
+            <th scope="row">{{id}}</th>
+            <td>{{hospitalName}}</td>
+            <td>{{roadNameAddress}}</td>
+        </tr>
+    {{/hospitals}}
+    </tbody>
+</table>
+<ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" href="?page={{previous}}">이전</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{next}}">다음</a></li>
+</ul>
+{{>layouts/footer}}
